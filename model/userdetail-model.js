@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const userdetailSchema = new mongoose.Schema({
     
         dateofBirth:{
-            type:Number,
+            type:String,
             
         },
         dateOfJoinning:{

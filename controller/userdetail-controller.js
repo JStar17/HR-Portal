@@ -12,7 +12,7 @@ const userdetailModel = require("../model/userdetail-model")
         let lastapprisalDate=req.body.lastapprisalDate
        //encript
        
-         let user= req.body.user
+         let userId= req.body.userId
 
 
     let userdetail = new userdetailModel({
@@ -23,7 +23,7 @@ const userdetailModel = require("../model/userdetail-model")
             address:address,
             emergencyContact:emergencyContact,
             lastapprisalDate:lastapprisalDate,
-            user:user
+            userId:userId
 
 
     })
@@ -32,9 +32,9 @@ const userdetailModel = require("../model/userdetail-model")
 
     userdetail.save(function (err, data) {
         if (err) {
-            res.json({ msg: "SMW", data: err, status: -1 })//-1  [ 302 404 500 ]
+            res.json({ msg: "Something went wrong", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
-            res.json({ msg: "signup done", data: data, status: 200 })//http status code 
+            res.json({ msg: "details added", data: data, status: 200 })//http status code 
         }
     })
 
@@ -79,7 +79,7 @@ module.exports.updateuserdetail = function(req,res){
     let lastapprisalDate=req.body.lastapprisalDate
    //encript
    
-     let user= req.body.user
+     let userId= req.body.userId
 
     userdetailModel.updateOne({_id:userdetailId},{dateOfBirth:dateOfBirth,dateOfJoinning:dateOfJoinning,marriatlStatus:marriatlStatus,address:
         address,emergencyContact:emergencyContact,lastapprisalDate:lastapprisalDate,user:user},function(err,data){
