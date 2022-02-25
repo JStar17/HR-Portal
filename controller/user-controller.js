@@ -1,18 +1,19 @@
 const bcrypt = require("bcrypt")
-const UserModel = require("../model/user_model")
+const UserModel = require("../model/user-model")
 
 //add [ POST ]
-    module.exports.addUser = function (req, res) {
-
+    module.exports.addUser = function (req,res) {
+        
         let firstName = req.body.firstName 
         let lastName = req.body.lastName
         let userName=req.body.userName
         let email=req.body.email
         let gender=req.body.gender
         let mobileNo=req.body.mobileNo
-        let education=req.body.education
-        let dateOfBirth=req.body.dateOfBirth
+        let password=req.body.password
+        
         let address=req.body.address
+        let salary=req.body.salary
 
        //encript
        let encPassword = bcrypt.hashSync(password,10)
@@ -20,17 +21,20 @@ const UserModel = require("../model/user_model")
 
 
     let user = new UserModel({
-        firstName: firstName,
+            
+            firstName: firstName,
             lastName:lastName,
             userName:userName,
             email: email,
             mobileNo:mobileNo,
-            education:education,
-            dateOfBirth:dateOfBirth,
+           
+            
             password: encPassword,
             gender:gender,
             address:address,
+            salary:salary,
             role: role
+
     })
 
 
@@ -46,7 +50,7 @@ const UserModel = require("../model/user_model")
 
 }
 //list
-module.exports.getAllUsers = function (req, res) {
+module.exports.getAllUsers = function (req,res) {
 
     UserModel.find().populate("role").exec(function (err, data) {
         if (err) {
@@ -79,15 +83,18 @@ module.exports.updateUser = function(req,res){
     let firstName = req.body.firstName 
     let lastName = req.body.lastName
     let userName=req.body.userName
+    let email=req.body.email
     let gender=req.body.gender
     let mobileNo=req.body.mobileNo
     let education=req.body.education
-    let dateOfBirth=req.body.dateOfBirth
+   
     let password=req.body.password
     let address=req.body.address
+    let salary=req.body.salary
+    let role=req.body.role
     UserModel.updateOne({_id:userId},{firstName:firstName,lastName:lastName,
         userName:userName,gender:gender,mobileNo:mobileNo,education:education,
-        dateOfBirth:dateOfBirth,address:address, email:email,password:password},function(err,data){
+        dateOfBirth:dateOfBirth,address:address, email:email,password:password,role:role},function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{

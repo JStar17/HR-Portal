@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
             type:String,
             required:true
         },
-        UserName:{
+        userName:{
             type:String,
             required:true
         },
@@ -27,9 +27,7 @@ const UserSchema = new mongoose.Schema({
         mobileNo:{
             type:Number
         },
-        education:{
-            type:String
-        },
+        
         dateOfBirth:{
             type:Date
         },
@@ -37,9 +35,13 @@ const UserSchema = new mongoose.Schema({
             type:String
         },
         role : {
-                type:mongoose.Schema.Types.ObjectId,
+                type:mongoose.Types.ObjectId,
                 ref:"role"
-        }
+        },
+        salary : {
+                 type:Number
+        },
+
 })
 
 
