@@ -7,8 +7,6 @@ const relationController = require("./controller/relation-controller")
 const userdetailController = require("./controller/userdetail-controller")
 const userrelativeController=require("./controller/userrelative-controller")
 
-
-
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -57,7 +55,6 @@ app.delete("/userdetails/:userdetailId",userdetailController.deleteuserdetails)
 app.put("/userdetails",userdetailController.updateuserdetail)
 
 //user realtive
-
 app.post("/userrelative",userrelativeController.addUserrelative)
 app.get("/userrelative",userrelativeController.getAllUsersrelative)
 app.delete("/userrelative/:userrelativeId",userrelativeController.deleteUserrelative)

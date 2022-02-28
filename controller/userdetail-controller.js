@@ -29,7 +29,6 @@ const userdetailModel = require("../model/userdetail-model")
     })
 
 
-
     userdetail.save(function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong", data: err, status: -1 })//-1  [ 302 404 500 ]
