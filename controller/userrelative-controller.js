@@ -31,13 +31,15 @@ const UserrelativeModel = require("../model/userrelative-model")
 }
 //list
 module.exports.getAllUsersrelative= function (req,res) {
-
+    UserrelativeModel.find().populate("user").populate("relation").exec(function (err, data) {
         if (err) {
             res.json({ msg: "SMW", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
             res.json({ msg: "users ret...", data: data, status: 200 })//http status code 
         }
-    }
+    })
+}
+
 
 
 
