@@ -7,6 +7,7 @@ const relationController = require("./controller/relation-controller")
 const userdetailController = require("./controller/userdetail-controller")
 const userrelativeController=require("./controller/userrelative-controller")
 const celebrationController=require("./controller/celebration-controller")
+const leaveController=require("./controller/leave-controller")
 
 const app = express()
 app.use(express.json())
@@ -66,6 +67,12 @@ app.post("/celebration",celebrationController.addcelebration)
 app.get("/celebration",celebrationController.getAllcelebration)
 app.delete("/celebration/:celebrationId",celebrationController.deletecelebration)
 app.put("/celebration",celebrationController.updatecelebration)
+
+// leave
+app.post("/leave",leaveController.addleave)
+app.get("/leave",leaveController.getAllleave)
+app.delete("/leave/:leaveId",leaveController.deleteleave)
+app.put("/leave",leaveController.updateleave)
 
 
 
