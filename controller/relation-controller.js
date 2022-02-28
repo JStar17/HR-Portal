@@ -57,7 +57,7 @@ module.exports.updateRelation = function(req,res){
     let relationId = req.body.relationId
     let relationName = req.body.relationName 
 
-    relationModel.updateOne({_id:userId},{relationName:relationName},function(err,data){
+    relationModel.updateOne({_id:relationId},{relationName:relationName},function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{

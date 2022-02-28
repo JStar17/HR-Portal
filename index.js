@@ -6,6 +6,7 @@ const userController = require("./controller/user-controller")
 const relationController = require("./controller/relation-controller")
 const userdetailController = require("./controller/userdetail-controller")
 const userrelativeController=require("./controller/userrelative-controller")
+const celebrationController=require("./controller/celebration-controller")
 
 const app = express()
 app.use(express.json())
@@ -59,6 +60,13 @@ app.post("/userrelative",userrelativeController.addUserrelative)
 app.get("/userrelative",userrelativeController.getAllUsersrelative)
 app.delete("/userrelative/:userrelativeId",userrelativeController.deleteUserrelative)
 app.put("/userrelative",userrelativeController.updateUserrelative)
+
+//celebration
+app.post("/celebration",celebrationController.addcelebration)
+app.get("/celebration",celebrationController.getAllcelebration)
+app.delete("/celebration/:celebrationId",celebrationController.deletecelebration)
+app.put("/celebration",celebrationController.updatecelebration)
+
 
 
 app.listen (3000,function(req,res){
