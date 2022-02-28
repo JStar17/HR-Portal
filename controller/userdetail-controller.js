@@ -12,7 +12,7 @@ const userdetailModel = require("../model/userdetail-model")
         let lastapprisalDate=req.body.lastapprisalDate
        //encript
        
-         let userId= req.body.userId
+         let user= req.body.user
 
 
     let userdetail = new userdetailModel({
@@ -23,7 +23,7 @@ const userdetailModel = require("../model/userdetail-model")
             address:address,
             emergencyContact:emergencyContact,
             lastapprisalDate:lastapprisalDate,
-            userId:userId
+            user:user
 
 
     })
@@ -79,10 +79,10 @@ module.exports.updateuserdetail = function(req,res){
     let lastapprisalDate=req.body.lastapprisalDate
    //encript
    
-     let userId= req.body.userId
+     let user= req.body.user
 
     userdetailModel.updateOne({_id:userdetailId},{dateOfBirth:dateOfBirth,dateOfJoinning:dateOfJoinning,marriatlStatus:marriatlStatus,address:
-        address,emergencyContact:emergencyContact,lastapprisalDate:lastapprisalDate,user:user},function(err,data){
+        address,emergencyContact:emergencyContact,lastapprisalDate:lastapprisalDate},function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{

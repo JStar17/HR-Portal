@@ -5,6 +5,7 @@ const roleController=require("./controller/role-controller")
 const userController = require("./controller/user-controller")
 const relationController = require("./controller/relation-controller")
 const userdetailController = require("./controller/userdetail-controller")
+const userrelativeController=require("./controller/userrelative-controller")
 
 
 
@@ -54,6 +55,14 @@ app.post("/userdetails",userdetailController.adduserdetail)
 app.get("/userdetails",userdetailController.getAlluserdetails)
 app.delete("/userdetails/:userdetailId",userdetailController.deleteuserdetails)
 app.put("/userdetails",userdetailController.updateuserdetail)
+
+//user realtive
+
+app.post("/userrelative",userrelativeController.addUserrelative)
+app.get("/userrelative",userrelativeController.getAllUsersrelative)
+app.delete("/userrelative/:userrelativeId",userrelativeController.deleteUserrelative)
+app.put("/userrelative",userrelativeController.updateUserrelative)
+
 
 app.listen (3000,function(req,res){
     console.log("server strated at 3000")

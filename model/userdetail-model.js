@@ -4,11 +4,11 @@ const mongoose = require("mongoose")
 const userdetailSchema = new mongoose.Schema({
     
         dateofBirth:{
-            type:String,
+            type:Date,
             
         },
         dateOfJoinning:{
-            type:Number,
+            type:Date,
             
         },
         marriatlStatus:{
@@ -22,8 +22,12 @@ const userdetailSchema = new mongoose.Schema({
             type:Number
         },
         lastapprisalDate:{
-            type:Number
+            type:Date
         },
+        user:{
+            type:mongoose.Types.ObjectId,
+                ref:"user"
+        }
       
 })
 
