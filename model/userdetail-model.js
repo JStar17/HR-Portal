@@ -16,13 +16,13 @@ const userdetailSchema = new mongoose.Schema({
             
         },
         address:{
-            type:String
+            type:String,
         },
         emergencyContact:{
-            type:Number
+            type:Number,
         },
         lastapprisalDate:{
-            type:Date
+            type:Date,
         },
         user:{
             type:mongoose.Types.ObjectId,
