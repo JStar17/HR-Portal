@@ -12,7 +12,7 @@ const participantsSchema = new mongoose.Schema({
             type:mongoose.Types.ObjectId,
                 ref:"user"
         },
-        celebbrationn:{
+        celebration:{
             type:mongoose.Types.ObjectId,
                 ref:"celebration"
         }
