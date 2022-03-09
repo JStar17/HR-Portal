@@ -14,9 +14,11 @@ const UserModel = require("../model/user-model")
         
         let address=req.body.address
         let salary=req.body.salary
+        console.log(firstName,email,password)
 
        //encript
-       let encPassword = bcrypt.hashSync(password,10)
+       const salt = bcrypt.genSaltSync(10)
+       let encpassword = bcrypt.hashSync(password,salt)
        let role = req.body.role
 
 
@@ -29,7 +31,7 @@ const UserModel = require("../model/user-model")
             mobileNo:mobileNo,
            
             
-            password: encPassword,
+            password:encpassword,
             gender:gender,
             address:address,
             salary:salary,

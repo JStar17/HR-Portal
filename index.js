@@ -13,6 +13,8 @@ const participantsController=require("./controller/participants-controller")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+var cors =require('cors')
+app.use(cors())
 
 mongoose.connect("mongodb://localhost:27017/HR-Portal",function(err){
     if(err){
@@ -84,8 +86,8 @@ app.put("/participants",participantsController.updateparticipants)
 
 
 
-app.listen (3000,function(req,res){
-    console.log("server strated at 3000")
+app.listen (2000,function(req,res){
+    console.log("server strated at 2000")
 
 
 })
