@@ -39,7 +39,7 @@ module.exports.getAllleave = function (req,res){
         if (err) {
             res.json({ msg: "Something went wrong", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
-            res.json({ msg: "leave set",data: data, status: 200 })//http status code 
+            res.json({ msg: "leave ",data: data, status: 200 })//http status code 
         }
     })
 }

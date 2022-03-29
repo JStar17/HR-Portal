@@ -41,11 +41,12 @@ app.put("/role",roleController.updateRole)
 
 //user 
 app.post("/users",userController.addUser)
+app.get("/users/:userId",userController.listOneUser)
 app.get("/users",userController.getAllUsers)
 app.delete("/users/:userId",userController.deleteUser)
-app.put("/users",userController.updateUser)
+app.put("/users/:userId",userController.updateUser)
 
-//app.post("/login",userController.login)
+app.post("/login",userController.login)
 
 //relation
 app.post("/relations",relationController.addRelation)

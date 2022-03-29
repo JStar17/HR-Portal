@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
 const UserModel = require("../model/user-model")
 
 //add [ POST ]
@@ -11,7 +11,7 @@ const UserModel = require("../model/user-model")
         let gender=req.body.gender
         let mobileNo=req.body.mobileNo
         let password=req.body.password
-        
+        let dateOfBirth=req.body.dateOfBirth
         let address=req.body.address
         let salary=req.body.salary
         console.log(firstName,email,password)
@@ -29,8 +29,7 @@ const UserModel = require("../model/user-model")
             userName:userName,
             email: email,
             mobileNo:mobileNo,
-           
-            
+            dateOfBirth:dateOfBirth,    
             password:encpassword,
             gender:gender,
             address:address,
@@ -58,10 +57,22 @@ module.exports.getAllUsers = function (req,res) {
         if (err) {
             res.json({ msg: "SMW", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
-            res.json({ msg: "users ret...", data: data, status: 200 })//http status code 
+            res.json({ msg: "users details..", data: data, status: 200 })//http status code 
         }
     })
 }
+module.exports.listOneUser = function(req,res){
+    let userId = req.params.userId
+    UserModel.findById(userId,function(err,data){
+        if(err){
+            res.json({msg:"SMW",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"One Exam",status:200,data:data})
+        }
+    })
+}
+
 
 
 //delete
@@ -81,7 +92,7 @@ module.exports.deleteUser = function(req,res){
 module.exports.updateUser = function(req,res){
 
     //update role set roleName = admin where roleId = 12121 
-    let userId = req.body.userId
+    let userId = req.params.userId
     let firstName = req.body.firstName 
     let lastName = req.body.lastName
     let userName=req.body.userName
@@ -89,12 +100,12 @@ module.exports.updateUser = function(req,res){
     let gender=req.body.gender
     let mobileNo=req.body.mobileNo
     let education=req.body.education
-   
+    let dateOfBirth=req.body.dateOfBirth
     let password=req.body.password
     let address=req.body.address
     let salary=req.body.salary
     let role=req.body.role
-    UserModel.updateOne({_id:userId},{firstName:firstName,lastName:lastName,
+    UserModel.findByIdAndUpdate(userId,{firstName:firstName,lastName:lastName,
         userName:userName,gender:gender,mobileNo:mobileNo,education:education,
         dateOfBirth:dateOfBirth,address:address, email:email,password:password,role:role},function(err,data){
         if(err){
@@ -105,6 +116,18 @@ module.exports.updateUser = function(req,res){
     })
 
 }
+module.exports.listOneUser = function(req,res){
+    let userId = req.params.userId
+    UserModel.findById(userId,function(err,data){
+        if(err){
+            res.json({msg:"SWW",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"One User...",status:200,data:data})
+        }
+    })
+}
+
 //login 
 module.exports.login = function(req,res){
 
