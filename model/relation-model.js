@@ -5,7 +5,7 @@ const relationSchema = new mongoose.Schema({
     
         relationName:{
             type:String,
-            required:true
+            
         }
        
 })

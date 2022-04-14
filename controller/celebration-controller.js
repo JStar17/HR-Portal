@@ -50,7 +50,7 @@ module.exports.deletecelebration = function(req,res){
     //params userid 
     let celebrationId = req.params.celebrationId //postman -> userid 
 
-    userdetailModel.deleteOne({_id:celebrationId},function (err, data) {
+    celebrationModel.deleteOne({_id:celebrationId},function (err, data) {
         if (err) {
             res.json({ msg: "Something went wrong", data: err, status: -1 })//-1  [ 302 404 500 ]
         } else {
@@ -62,14 +62,14 @@ module.exports.deletecelebration = function(req,res){
 module.exports.updatecelebration = function(req,res){
 
     //update role set roleName = admin where roleId = 12121 
-        let celebrationId= req.body.celebrationId
+        let celebrationId= req.params.celebrationId
         let title = req.body.title 
         let description = req.body.description
         let date=req.body.date
         let time=req.body.time
         let venue=req.body.venue
     
-    celebrationModel.updateOne({_id:celebrationId},{title:title,description:description,date:date,time:time,venue:venue},function(err,data){
+    celebrationModel.findByIdAndUpdate(celebrationId,{title:title,description:description,date:date,time:time,venue:venue},function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{
@@ -77,4 +77,15 @@ module.exports.updatecelebration = function(req,res){
         }
     })
 
+}
+module.exports.listOneCelebration = function(req,res){
+    let celebrationId = req.params.celebrationId
+    celebrationModel.findById(celebrationId,function(err,data){
+        if(err){
+            res.json({msg:"SMW",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"One Celebration...",status:200,data:data})
+        }
+    })
 }

@@ -24,7 +24,8 @@ mongoose.connect("mongodb://localhost:27017/HR-Portal",function(err){
       console.log("database connected");
   }
 })
-
+app.post('/forgotPassword',sessionController.mailLinkToResetPassword)
+app.post('/reset',sessionController.resetPassword)
 app.get("/login",sessionController.login)
 
 app.get("/",function(req,res){
@@ -64,13 +65,14 @@ app.put("/userdetails",userdetailController.updateuserdetail)
 app.post("/userrelative",userrelativeController.addUserrelative)
 app.get("/userrelative",userrelativeController.getAllUsersrelative)
 app.delete("/userrelative/:userrelativeId",userrelativeController.deleteUserrelative)
-app.put("/userrelative",userrelativeController.updateUserrelative)
+app.put("/userrelative/:userrelativeId",userrelativeController.updateUserrelative)
 
 //celebration
 app.post("/celebration",celebrationController.addcelebration)
 app.get("/celebration",celebrationController.getAllcelebration)
+app.get("/celebration/:celebrationId",celebrationController.listOneCelebration)
 app.delete("/celebration/:celebrationId",celebrationController.deletecelebration)
-app.put("/celebration",celebrationController.updatecelebration)
+app.put("/celebration/:celebrationId",celebrationController.updatecelebration)
 
 // leave
 app.post("/leave",leaveController.addleave)

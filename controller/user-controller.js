@@ -13,6 +13,7 @@ const UserModel = require("../model/user-model")
         let password=req.body.password
         let dateOfBirth=req.body.dateOfBirth
         let address=req.body.address
+        let country=req.body.country
         let salary=req.body.salary
         console.log(firstName,email,password)
 
@@ -33,6 +34,7 @@ const UserModel = require("../model/user-model")
             password:encpassword,
             gender:gender,
             address:address,
+            country:country,
             salary:salary,
             role: role
 
@@ -61,17 +63,17 @@ module.exports.getAllUsers = function (req,res) {
         }
     })
 }
-module.exports.listOneUser = function(req,res){
-    let userId = req.params.userId
-    UserModel.findById(userId,function(err,data){
-        if(err){
-            res.json({msg:"SMW",status:-1,data:err})
-        }
-        else{
-            res.json({msg:"One Exam",status:200,data:data})
-        }
-    })
-}
+// module.exports.listOneUser = function(req,res){
+//     let userId = req.params.userId
+//     UserModel.findById(userId,function(err,data){
+//         if(err){
+//             res.json({msg:"SMW",status:-1,data:err})
+//         }
+//         else{
+//             res.json({msg:"One Exam",status:200,data:data})
+//         }
+//     })
+// }
 
 
 
@@ -103,11 +105,12 @@ module.exports.updateUser = function(req,res){
     let dateOfBirth=req.body.dateOfBirth
     let password=req.body.password
     let address=req.body.address
+    let country=req.body.country
     let salary=req.body.salary
     let role=req.body.role
     UserModel.findByIdAndUpdate(userId,{firstName:firstName,lastName:lastName,
         userName:userName,gender:gender,mobileNo:mobileNo,education:education,
-        dateOfBirth:dateOfBirth,address:address, email:email,password:password,role:role},function(err,data){
+        dateOfBirth:dateOfBirth,address:address,country:country, email:email,password:password,role:role},function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
         }else{
@@ -118,9 +121,9 @@ module.exports.updateUser = function(req,res){
 }
 module.exports.listOneUser = function(req,res){
     let userId = req.params.userId
-    UserModel.findById(userId,function(err,data){
+    UserModel.findById(userId).populate("role").exec(function(err,data){
         if(err){
-            res.json({msg:"SWW",status:-1,data:err})
+            res.json({msg:"SMW",status:-1,data:err})
         }
         else{
             res.json({msg:"One User...",status:200,data:data})
@@ -136,7 +139,7 @@ module.exports.login = function(req,res){
 
     let isCorrect = false; 
 
-    UserModel.findOne({email:param_email},function(err,data){
+    UserModel.findOne({email:param_email}).populate('role').exec(function(err,data){
         if(data){
             let ans =  bcrypt.compareSync(param_password,data.password)
             if(ans == true){
@@ -147,7 +150,7 @@ module.exports.login = function(req,res){
         if (isCorrect == false) {
             res.json({ msg: "Invalid Credentials...", data: req.body, status: -1 })//-1  [ 302 404 500 ]
         } else {
-            res.json({ msg: "Login....", data: data, status: 200 })//http status code 
+            res.json({ msg: "Login Successfull", data: data, status: 200 })//http status code 
         }
     })
 

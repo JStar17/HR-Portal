@@ -34,6 +34,9 @@ const UserSchema = new mongoose.Schema({
         address:{
             type:String
         },
+        country:{
+            type:String
+        },
         role : {
                 type:mongoose.Types.ObjectId,
                 ref:"role"

@@ -12,7 +12,7 @@ const celebrationSchema = new mongoose.Schema({
             
         },
         date:{
-            type:Date,
+            type:String,
             
         },
         time:{
