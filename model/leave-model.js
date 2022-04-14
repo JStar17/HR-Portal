@@ -11,8 +11,12 @@ const leaveSchema = new mongoose.Schema({
             type:String,
             
         },
-        dates:{
-            type:Date,
+        fromdate:{
+            type:String,
+            
+        },
+        todate:{
+            type:String,
             
         },
         isApproved:{

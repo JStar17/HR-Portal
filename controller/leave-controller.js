@@ -6,7 +6,8 @@ const leaveModel = require("../model/leave-model")
 
         let leaveType= req.body.leaveType
         let notes  = req.body.notes
-        let dates=req.body.dates
+        let fromdate=req.body.fromdate
+        let todate=req.body.todate
         let isApproved=req.body.isApproved
         let reason=req.body.reason
         
@@ -16,7 +17,8 @@ const leaveModel = require("../model/leave-model")
        
         leaveType:leaveType,
         notes:notes,
-        dates:dates,
+        fromdate:fromdate,
+        todate:todate,
         isApproved:isApproved,
         reason:reason
    })
@@ -65,14 +67,16 @@ module.exports.updateleave = function(req,res){
         let leaveId= req.body.leaveId
         let leaveType= req.body.leaveType
         let notes  = req.body.notes
-        let dates=req.body.dates
+        let fromdate=req.body.fromdate
+        let todate=req.body.todate
         let isApproved=req.body.isApproved
         let reason=req.body.reason
         
         
     leaveModel.updateOne({_id:leaveId},{ leaveType:leaveType,
         notes:notes,
-        dates:dates,
+        fromdate:fromdate,
+        todate:todate,
         isApproved:isApproved,
         reason:reason},function(err,data){
         if(err){
