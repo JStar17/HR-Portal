@@ -19,9 +19,13 @@ const leaveSchema = new mongoose.Schema({
             type:String,
             
         },
-        isApproved:{
-            type:Number,
+        status:{
+            type:String
         },
+        user : {
+            type:mongoose.Types.ObjectId,
+            ref:"user"
+    },
         reason:{
             type:String,
         }

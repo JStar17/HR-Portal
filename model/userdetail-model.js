@@ -21,9 +21,7 @@ const userdetailSchema = new mongoose.Schema({
         emergencyContact:{
             type:Number,
         },
-        lastapprisalDate:{
-            type:Date,
-        },
+    
         user:{
             type:mongoose.Types.ObjectId,
                 ref:"user"

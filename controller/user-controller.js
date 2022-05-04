@@ -132,26 +132,49 @@ module.exports.listOneUser = function(req,res){
 }
 
 //login 
+// module.exports.login = function(req,res){
+
+//     let param_email = req.body.email
+//     let param_password  = req.body.password 
+
+//     let isCorrect = false; 
+
+//     UserModel.findOne({email:param_email}).populate('role').exec(function(err,data){
+//         if(data){
+//             let ans =  bcrypt.compareSync(param_password,data.password)
+//             if(ans == true){
+//                     isCorrect = true
+//             }
+//         }
+
+//         if (isCorrect == false) {
+//             res.json({ msg: "Invalid Credentials...", data: req.body, status: -1 })//-1  [ 302 404 500 ]
+//         } else {
+//             res.json({ msg: "Login Successfull", data: data, status: 200 })//http status code 
+//         }
+//     })
+
+// }
+
 module.exports.login = function(req,res){
-
+    let isCorrect = false
     let param_email = req.body.email
-    let param_password  = req.body.password 
-
-    let isCorrect = false; 
-
+    let param_password = req.body.password
     UserModel.findOne({email:param_email}).populate('role').exec(function(err,data){
-        if(data){
-            let ans =  bcrypt.compareSync(param_password,data.password)
-            if(ans == true){
-                    isCorrect = true
-            }
-        }
+      if(data){
+         let ans = bcrypt.compareSync(param_password,data.password)
+         if(ans == true){
+             isCorrect = true
+         }
+      }   
+     
+      if(isCorrect != false){
+        res.json({msg:"Login Successful!",status:200,data:data})
 
-        if (isCorrect == false) {
-            res.json({ msg: "Invalid Credentials...", data: req.body, status: -1 })//-1  [ 302 404 500 ]
-        } else {
-            res.json({ msg: "Login Successfull", data: data, status: 200 })//http status code 
-        }
+      }
+      else{
+         res.json({msg:"Invalid Credentials!",status:-1,data:req.body})
+
+      }
     })
-
 }

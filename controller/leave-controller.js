@@ -8,8 +8,9 @@ const leaveModel = require("../model/leave-model")
         let notes  = req.body.notes
         let fromdate=req.body.fromdate
         let todate=req.body.todate
-        let isApproved=req.body.isApproved
         let reason=req.body.reason
+        let user = req.body.user
+        let status = "pending"
         
 
 
@@ -19,8 +20,9 @@ const leaveModel = require("../model/leave-model")
         notes:notes,
         fromdate:fromdate,
         todate:todate,
-        isApproved:isApproved,
-        reason:reason
+        user:user,
+        reason:reason,
+        status:status
    })
 
 
@@ -45,6 +47,19 @@ module.exports.getAllleave = function (req,res){
         }
     })
 }
+module.exports.listOneLeave = function(req,res){
+    let leaveId = req.params.leaveId
+    leaveModel.findById(leaveId).populate({
+        path: 'user',populate:{path: 'role',model: 'role'}}).exec(function(err,data){
+        if(err){
+            res.json({msg:"SMW",status:-1,data:err})
+        }
+        else{
+            res.json({msg:"Leave detail...",status:200,data:data})
+        }
+    })
+}
+
 
 
 //delete
@@ -64,20 +79,21 @@ module.exports.deleteleave = function(req,res){
 module.exports.updateleave = function(req,res){
 
     //update role set roleName = admin where roleId = 12121 
-        let leaveId= req.body.leaveId
+        let leaveId= req.params.leaveId
         let leaveType= req.body.leaveType
         let notes  = req.body.notes
         let fromdate=req.body.fromdate
         let todate=req.body.todate
-        let isApproved=req.body.isApproved
+        let status = req.body.status
+        
         let reason=req.body.reason
         
         
-    leaveModel.updateOne({_id:leaveId},{ leaveType:leaveType,
+    leaveModel.findByIdAndUpdate(leaveId,{ leaveType:leaveType,
         notes:notes,
         fromdate:fromdate,
         todate:todate,
-        isApproved:isApproved,
+        status:status,
         reason:reason},function(err,data){
         if(err){
             res.json({msg:"Something went wrong!!!",status:-1,data:err})
