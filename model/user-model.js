@@ -44,6 +44,35 @@ const UserSchema = new mongoose.Schema({
         salary : {
                  type:Number
         },
+        profile_pic: {
+            type:String
+   },
+   bankName: {
+    type:String
+},
+accountNo: {
+    type:String
+},
+ifsc: {
+    type:String
+},
+panno: {
+    type:String
+},
+relation: {
+    type:String
+},
+relativename: {
+    type:String
+},
+emnumber: {
+    type:String
+},
+
+
+
+
+
 
 })
 
